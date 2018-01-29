@@ -40,7 +40,7 @@ public class Invoice {
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Customer customer;
 
-	@OneToMany(mappedBy = "invoice")
+	@OneToMany(/*mappedBy = "invoice", */cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ItemInvoice> itemInvoices;
 
 	public long getId() {

@@ -19,10 +19,11 @@ public class UserTest {
 	@Test
 	public void createUserTest()
 	{
-		UserDetailDTO domainObj = new UserDetailDTO();
-		domainObj.setUserName("hakim");
-		domainObj.setPassword("1234");
-		userDetailService.create(domainObj );
-		System.out.println("user detail created.");
+		userDetailService.createUserTest();
+//		UserDetailDTO domainObj = new UserDetailDTO();
+//		domainObj.setUserName("hakim");
+//		domainObj.setPassword("1234");
+//		userDetailService.create(domainObj );
+//		System.out.println("user detail created.");
 	}
 }

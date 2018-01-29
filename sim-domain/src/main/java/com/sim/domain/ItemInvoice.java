@@ -21,16 +21,16 @@ public class ItemInvoice {
 	private long id;
 
 	@Column(name = "purchased_quantity", nullable = false)
-	private double purchangedQuantity;
+	private double purchasedQuantity;
 
 	@Column(name = "created_ts", nullable = false)
 	private Timestamp createdTs;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Item item;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Invoice invoice;
+//	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+//	private Invoice invoice;
 
 	public long getId() {
 		return id;
@@ -40,12 +40,12 @@ public class ItemInvoice {
 		this.id = id;
 	}
 
-	public double getPurchangedQuantity() {
-		return purchangedQuantity;
+	public double getPurchasedQuantity() {
+		return purchasedQuantity;
 	}
 
-	public void setPurchangedQuantity(double purchangedQuantity) {
-		this.purchangedQuantity = purchangedQuantity;
+	public void setPurchasedQuantity(double purchasedQuantity) {
+		this.purchasedQuantity = purchasedQuantity;
 	}
 
 	public Timestamp getCreatedTs() {
@@ -64,18 +64,18 @@ public class ItemInvoice {
 		this.item = item;
 	}
 
-	public Invoice getInvoice() {
-		return invoice;
-	}
-
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
-	}
+//	public Invoice getInvoice() {
+//		return invoice;
+//	}
+//
+//	public void setInvoice(Invoice invoice) {
+//		this.invoice = invoice;
+//	}
 
 	@Override
 	public String toString() {
-		return String.format("ItemInvoice [id=%s, purchangedQuantity=%s, createdTs=%s, item=%s, invoice=%s]", id,
-				purchangedQuantity, createdTs, item, invoice);
+		return String.format("ItemInvoice [id=%s, purchangedQuantity=%s, createdTs=%s]", id, purchasedQuantity,
+				createdTs);
 	}
 
 }

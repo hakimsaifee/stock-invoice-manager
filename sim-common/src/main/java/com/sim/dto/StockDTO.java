@@ -2,6 +2,10 @@ package com.sim.dto;
 
 import java.sql.Timestamp;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+
 public class StockDTO {
 
 	private long id;
@@ -42,6 +46,10 @@ public class StockDTO {
 
 	public void setItem(ItemDTO item) {
 		this.item = item;
+	}
+
+	public StringProperty  getQuantityName() {
+		return new SimpleStringProperty(String.valueOf(this.getQuantity()));
 	}
 	
 	

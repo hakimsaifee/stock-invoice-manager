@@ -22,6 +22,8 @@ public class ItemDTO {
 
 	private Timestamp updatedTs;
 
+	private byte [] barcodeImage;
+	
 	private CategoryDTO category;
 
 	private StockDTO stock;
@@ -114,4 +116,11 @@ public class ItemDTO {
 		this.stock = stock;
 	}
 
+	public byte[] getBarcodeImage() {
+		return barcodeImage;
+	}
+	
+	public void setBarcodeImage(byte[] barcodeImage) {
+		this.barcodeImage = barcodeImage;
+	}
 }

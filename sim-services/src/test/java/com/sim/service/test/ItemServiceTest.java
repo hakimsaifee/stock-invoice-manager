@@ -1,5 +1,6 @@
 package com.sim.service.test;
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ public class ItemServiceTest {
 	private ItemService itemService;
 	
 	@Test
-	public void createUserTest()
+	public void crateItem()
 	{
 
 		ItemDTO item = new ItemDTO();
@@ -43,6 +44,18 @@ public class ItemServiceTest {
 		stockDTO.setItem(item);
 		item.setStock(stockDTO);
 		itemService.create(item );
-		System.out.println("user detail created.");
+		System.out.println("Item created.");
 	}
+	
+	
+	@Test
+	public void getItem() {
+	
+		List<ItemDTO> items = itemService.getAll();
+		System.out.println(items);
+	}
+//	@Test
+//	public void remvoeItem() {
+//		itemService.removeItem(301);
+//	}
 }

@@ -20,7 +20,11 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements DAO<T, 
 	protected Class<T> domainClass;
 
 	@PersistenceContext
-	private EntityManager em;
+	private EntityManager entityManager;
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
 
 	@SuppressWarnings("unchecked")
 	public AbstractDAO() {
@@ -34,10 +38,10 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements DAO<T, 
 		T persitedEntity = domainObj;
 
 		try {
-			em.persist(domainObj);
+			entityManager.persist(domainObj);
 		} catch (EntityExistsException e) {
 			LOGGER.error("Failed to create domain object. {} ", e);
-			persitedEntity = em.merge(domainObj);
+			persitedEntity = entityManager.merge(domainObj);
 		}
 		return persitedEntity;
 
@@ -47,7 +51,7 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements DAO<T, 
 		LOGGER.info("Updating domain object : {} " , domainObj);
 		T mergedObj = null;
 		try {
-			mergedObj = em.merge(domainObj);
+			mergedObj = entityManager.merge(domainObj);
 		} catch (Exception e) {
 			LOGGER.error("Failed to update domain object. {} ", e);
 		}
@@ -57,7 +61,7 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements DAO<T, 
 	public void delete(T domainObj) {
 		LOGGER.info("Deleting domain object : {} " , domainObj);
 		try {
-			em.remove(domainObj);
+			entityManager.remove(domainObj);
 		} catch (Exception e) {
 			LOGGER.error("Failed to delete domain object. {} ", e);
 		}
@@ -66,7 +70,7 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements DAO<T, 
 	public void delete(PK id) {
 		LOGGER.info("Deleting domain object for id : {} " , id);
 		try {
-			em.remove(id);
+			entityManager.remove(id);
 		} catch (Exception e) {
 			LOGGER.error("Failed to delete domain object by id. {} ", e);
 		}
@@ -76,7 +80,7 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements DAO<T, 
 	public T findByPK(PK id) {
 		LOGGER.info("Finding domain object for id : {} " , id);
 		try {
-			return em.find(domainClass, id);
+			return entityManager.find(domainClass, id);
 		} catch (Exception e) {
 			LOGGER.error("Failed to fetch domain object by id. {} ", e);
 			return null;
@@ -89,7 +93,7 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements DAO<T, 
 		List<T> results = null;
 		Query query;
 		try {
-			query = em.createQuery("from " + domainClass.getSimpleName());
+			query = entityManager.createQuery("from " + domainClass.getSimpleName());
 			results = (List<T>) query.getResultList();
 		} catch (Exception e) {
 			LOGGER.error("Failed to find all domain objects. : {} ", e);

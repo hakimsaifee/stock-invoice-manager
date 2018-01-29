@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -48,16 +49,23 @@ public class Item {
 	@Column(name = "updated_ts")
 	private Timestamp updatedTs;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	
+	@Lob
+	private byte [] barcodeImage;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Category category;
 
 	// TODO: Check for correct cascade type.
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "item")
 	private Stock stock;
 
-	@OneToMany(mappedBy = "item")
+	@OneToMany(mappedBy = "item",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ItemInvoice> itemInvoices;
 
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -154,12 +162,20 @@ public class Item {
 		this.itemInvoices = itemInvoices;
 	}
 
+	public byte[] getBarcodeImage() {
+		return barcodeImage;
+	}
+	
+	public void setBarcodeImage(byte[] barcodeImage) {
+		this.barcodeImage = barcodeImage;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format(
-				"Item [id=%s, name=%s, barcode=%s, description=%s, costPrice=%s, mrp=%s, rrp=%s, createdTs=%s, updatedTs=%s, category=%s, stock=%s, itemInvoices=%s]",
-				id, name, barcode, description, costPrice, mrp, rrp, createdTs, updatedTs, category, stock,
-				itemInvoices);
+				"Item [id=%s, name=%s, barcode=%s, description=%s, costPrice=%s, mrp=%s, rrp=%s, createdTs=%s, updatedTs=%s, category=%s, stock=%s]",
+				id, name, barcode, description, costPrice, mrp, rrp, createdTs, updatedTs, category, stock
+				);
 	}
 
 }
