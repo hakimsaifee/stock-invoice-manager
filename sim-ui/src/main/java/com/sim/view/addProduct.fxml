@@ -60,8 +60,20 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
+                                                <Label prefHeight="41.0" prefWidth="270.0" text="Already have a Barcode ?" GridPane.rowIndex="1">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <TextField fx:id="barcodeField" promptText="Scan or Enter Barcode " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </GridPane.margin>
+                                                </TextField>
                                                 <Label layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="270.0" text="Product Name" GridPane.rowIndex="3">
                                                    <padding>
                                                       <Insets left="10.0" right="10.0" />
@@ -87,57 +99,57 @@
                                                       <Insets left="10.0" right="10.0" />
                                                    </padding>
                                                 </Label>
-                                                <Label prefHeight="41.0" prefWidth="270.0" text="MRP (in rupees)" GridPane.rowIndex="9">
-                                                   <padding>
-                                                      <Insets left="10.0" right="10.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label prefHeight="41.0" prefWidth="270.0" text="Revised MRP(in rupees)" GridPane.rowIndex="11">
-                                                   <padding>
-                                                      <Insets left="10.0" right="10.0" />
-                                                   </padding>
-                                                </Label>
                                                 <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                    <GridPane.margin>
                                                       <Insets left="10.0" right="10.0" />
                                                    </GridPane.margin>
                                                 </TextField>
-                                                <TextField fx:id="mrpField" maxWidth="-Infinity" prefHeight="17.0" prefWidth="100.0" text="0.00" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="9" GridPane.vgrow="NEVER">
-                                                   <GridPane.margin>
-                                                      <Insets left="10.0" right="10.0" />
-                                                   </GridPane.margin>
-                                                </TextField>
-                                                <TextField fx:id="revisedMrpField" maxWidth="-Infinity" prefWidth="100.0" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="11">
-                                                   <GridPane.margin>
-                                                      <Insets left="10.0" right="10.0" />
-                                                   </GridPane.margin>
-                                                </TextField>
-                                                <Label prefHeight="41.0" prefWidth="270.0" text="Stock" GridPane.rowIndex="13">
+                                                <Label prefHeight="41.0" prefWidth="270.0" text="Cost Price" GridPane.rowIndex="9">
                                                    <padding>
                                                       <Insets left="10.0" right="10.0" />
                                                    </padding>
                                                 </Label>
-                                                <TextField fx:id="stockField" maxWidth="-Infinity" prefWidth="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                                                <TextField fx:id="costPriceField" maxWidth="-Infinity" prefHeight="17.0" prefWidth="100.0" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                                    <GridPane.margin>
                                                       <Insets left="10.0" right="10.0" />
                                                    </GridPane.margin>
                                                 </TextField>
-                                                <Label prefHeight="41.0" prefWidth="270.0" text="Threshold Limit (optional)" GridPane.rowIndex="15">
+                                                <Label prefHeight="41.0" prefWidth="270.0" text="MRP (in rupees)" GridPane.rowIndex="11">
                                                    <padding>
                                                       <Insets left="10.0" right="10.0" />
                                                    </padding>
                                                 </Label>
-                                                <TextField fx:id="stockField1" promptText="Minimum stock limit." GridPane.columnIndex="1" GridPane.rowIndex="15">
+                                                <TextField fx:id="mrpField" maxWidth="-Infinity" prefHeight="17.0" prefWidth="100.0" text="0.00" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="11" GridPane.vgrow="NEVER">
                                                    <GridPane.margin>
                                                       <Insets left="10.0" right="10.0" />
                                                    </GridPane.margin>
                                                 </TextField>
-                                                <Label prefHeight="41.0" prefWidth="270.0" text="Already have a Barcode ?" GridPane.rowIndex="1">
+                                                <Label prefHeight="41.0" prefWidth="270.0" text="Revised MRP(in rupees)" GridPane.rowIndex="13">
                                                    <padding>
                                                       <Insets left="10.0" right="10.0" />
                                                    </padding>
                                                 </Label>
-                                                <TextField fx:id="barcodeField" promptText="Scan or Enter Barcode " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <TextField fx:id="revisedMrpField" maxWidth="-Infinity" prefWidth="100.0" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </GridPane.margin>
+                                                </TextField>
+                                                <Label prefHeight="41.0" prefWidth="270.0" text="Stock" GridPane.rowIndex="15">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <TextField fx:id="stockField" maxWidth="-Infinity" prefWidth="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="15">
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </GridPane.margin>
+                                                </TextField>
+                                                <Label prefHeight="41.0" prefWidth="270.0" text="Threshold Limit (optional)" GridPane.rowIndex="17">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <TextField fx:id="stockField1" promptText="Minimum stock limit." GridPane.columnIndex="1" GridPane.rowIndex="17">
                                                    <GridPane.margin>
                                                       <Insets left="10.0" right="10.0" />
                                                    </GridPane.margin>
@@ -155,9 +167,9 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                              <Button mnemonicParsing="false" onAction="#saveProduct" onMouseClicked="#saveProduct" prefHeight="25.0" prefWidth="85.0" text="Save" />
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Print Barcode" GridPane.columnIndex="2" />
+                                              <Button mnemonicParsing="false" onAction="#saveProduct" onKeyPressed="#saveProduct" onMouseClicked="#saveProduct" prefHeight="25.0" prefWidth="85.0" text="Save" />
                                                 <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveProduct" onMouseClicked="#saveProduct" prefHeight="25.0" prefWidth="71.0" text="Cancel" GridPane.columnIndex="1" />
+                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Print Barcode" GridPane.columnIndex="2" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -243,7 +255,7 @@
                                                 <Insets left="10.0" right="10.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#searchProductByBarcode" text="Search">
+                                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#searchProductByBarcode" onKeyPressed="#searchProductByBarcode" text="Search">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" left="10.0" top="20.0" />
                                              </VBox.margin>
