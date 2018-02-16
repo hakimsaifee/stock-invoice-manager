@@ -70,13 +70,18 @@ public class InvoiceController implements Initializable {
 	private DatePicker invoiceDate;
 
 	@FXML
-	private TextField subTotalFeild;
+	private TextField subTotalField;
 	@FXML
-	private TextField discountFeild;
+	private TextField discountField;
 	@FXML
-	private TextField additionalChargesFeild;
+	private TextField additionalChargesField;
 	@FXML
-	private Label totalAmountFeild;
+	private Label totalAmountField;
+	
+	@FXML
+	private TextField cashTakenField;
+	@FXML
+	private Label changeGivenField;
 
 	private ObservableList<ItemInvoiceDTO> invoiceItems = FXCollections.observableArrayList();
 
@@ -105,10 +110,16 @@ public class InvoiceController implements Initializable {
 				});
 		
 		
-		discountFeild.textProperty().addListener(event -> { recalcuateCart();});
+		discountField.textProperty().addListener(event -> { recalcuateCart();});
 		
-		additionalChargesFeild.textProperty().addListener(event -> { recalcuateCart();});
+		additionalChargesField.textProperty().addListener(event -> { recalcuateCart();});
+
+		cashTakenField.textProperty().addListener(event -> { calculateChangeGiven();});
+		
+		totalAmountField.textProperty().addListener(event -> {calculateChangeGiven();} );
 	}
+
+	
 
 	@FXML
 	public void findProduct() {
@@ -135,15 +146,15 @@ public class InvoiceController implements Initializable {
 		for (ItemInvoiceDTO itemInvoiceDTO : invoiceItems) {
 			totalAmount = totalAmount + itemInvoiceDTO.getAmount();
 		}
-		subTotalFeild.setText(String.valueOf(totalAmount));
+		subTotalField.setText(String.valueOf(totalAmount));
 		//calculate discount
-		String discount = this.discountFeild.getText();
+		String discount = this.discountField.getText();
 		totalAmount = totalAmount - Double.valueOf(discount.isEmpty() ? "0.0" : discount);
 		//additional Charges
-		String additionalCharges = additionalChargesFeild.getText();
+		String additionalCharges = additionalChargesField.getText();
 		totalAmount = Double.valueOf(totalAmount + Double.valueOf(additionalCharges.isEmpty() ? "0.0" : additionalCharges));
 		
-		totalAmountFeild.setText(String.valueOf(totalAmount));
+		totalAmountField.setText(String.valueOf(totalAmount));
 	}
 	
 	private boolean isProductAlreadyInInvoiceList(String barcode) {
@@ -163,8 +174,8 @@ public class InvoiceController implements Initializable {
 	public void saveInvoice() {
 		InvoiceDTO invoiceDTO = new InvoiceDTO();
 		invoiceDTO.setCreatedTs(new Timestamp(System.currentTimeMillis()));
-		invoiceDTO.setTotalAmount(Double.valueOf(totalAmountFeild.getText()));
-		invoiceDTO.setDiscount(Double.valueOf(discountFeild.getText().isEmpty() ? "0.0" : discountFeild.getText()));
+		invoiceDTO.setTotalAmount(Double.valueOf(totalAmountField.getText()));
+		invoiceDTO.setDiscount(Double.valueOf(discountField.getText().isEmpty() ? "0.0" : discountField.getText()));
 
 		//TODO:Add Staff details...
 		invoiceDTO.setItemInvoices(invoiceItems);
@@ -189,7 +200,16 @@ public class InvoiceController implements Initializable {
 		} else {
 		    // ... user chose CANCEL or closed the dialog
 		}
-		
 	}
 	
+	private void calculateChangeGiven() {
+		if(totalAmountField != null && totalAmountField.getText() != null ) {
+			double totoalAmount = Double.parseDouble(totalAmountField.getText());
+			if(cashTakenField != null && cashTakenField.getText() !=null && 
+					!cashTakenField.getText().isEmpty()) {
+				double changeGiven = Double.parseDouble(cashTakenField.getText()) - totoalAmount;
+				changeGivenField.setText(String.valueOf(changeGiven));
+			}
+		}
+	}
 }

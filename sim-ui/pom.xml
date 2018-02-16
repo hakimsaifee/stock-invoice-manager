@@ -2,13 +2,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.sim</groupId>
 	<artifactId>sim-ui</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sim-ui</name>
-	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>org.sim</groupId>
+		<artifactId>sim-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../sim-parent/pom.xml</relativePath>
+	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,12 +26,58 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.sim</groupId>
 			<artifactId>sim-services</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-tx</artifactId>
+    <version>${spring.version}</version>
+</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.sim</groupId>
+			<artifactId>sim-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.sim</groupId>
+			<artifactId>sim-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
+
 	</dependencies>
 
 	<build>
@@ -39,6 +90,30 @@
 					<mainClass>com.sim.TestMain</mainClass>
 				</configuration>
 			</plugin>
+
+
+
+			<plugin><!--groupId>org.dstovall</groupId-->
+            <groupId>com.jolira</groupId>
+            <artifactId>onejar-maven-plugin</artifactId>
+            <version>1.4.4</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <configuration>
+                  <mainClass>com.sim.InvoiceStartup</mainClass>
+                  <attachToBuild>true</attachToBuild>
+                  <!-- https://code.google.com/p/onejar-maven-plugin/issues/detail?id=8 -->
+                  <!--classifier>onejar</classifier-->
+                  <filename>abc-onejar.jar</filename>
+                </configuration>
+                <goals>
+                  <goal>one-jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
 		</plugins>
 
 	</build>

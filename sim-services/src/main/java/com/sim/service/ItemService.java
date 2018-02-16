@@ -8,7 +8,7 @@ public interface ItemService {
 
 	ItemDTO create(ItemDTO itemDTO);
 
-	void removeItem(Integer id);
+	void removeItem(Integer number);
 	
 	List<ItemDTO> getAll();
 	

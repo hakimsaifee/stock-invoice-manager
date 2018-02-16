@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.sim.domain.Invoice;
 
 @Component("invoiceDAO")
-public class InvoiceDAOImpl extends AbstractDAO<Invoice, Long> implements InvoiceDAO{
+public class InvoiceDAOImpl extends AbstractDAO<Invoice, Integer> implements InvoiceDAO{
 
 	private final Logger LOGGER = LoggerFactory.getLogger(InvoiceDAOImpl.class);
 	

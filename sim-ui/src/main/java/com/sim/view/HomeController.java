@@ -16,11 +16,11 @@ public class HomeController{
 	private static final String INVOICE_SUMMARY_PAGE = "view/invoiceSummary.fxml";
 	private static final String INVOICE_GENERATION_PAGE = "view/invoiceGeneration.fxml";
 
-	
-	
 	@FXML
 	public void gotoAddProducts() throws IOException {
 		InvoiceStartup.navigate(ADD_PRODUCT_PAGE);
+		
+		
 	}
 
 	@FXML

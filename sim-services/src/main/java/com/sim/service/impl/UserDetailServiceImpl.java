@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 	@Autowired
 	private ItemDAO itemDAO;
 	
-	@Test
+	/*@Test
 	@Transactional
 	public void createUserTest()
 	{
@@ -62,7 +61,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 		List<ItemInvoice> itemInvoices = new ArrayList<ItemInvoice>();
 		ItemInvoice itemInvoice = new ItemInvoice();
 		itemInvoice.setPurchasedQuantity(3);
-		itemInvoice.setItem(itemDAO.findByPK(301));
+		itemInvoice.setItem(itemDAO.findByPK(301l));
 //		itemInvoice.setInvoice(invoice);
 		itemInvoice.setCreatedTs(new Timestamp(System.currentTimeMillis()));
 		itemInvoices.add(itemInvoice);
@@ -71,5 +70,5 @@ public class UserDetailServiceImpl implements UserDetailService {
 		invoiceDAO.create(invoice);
 		
 		System.out.println("Invoice created.");
-	}
+	}*/
 }

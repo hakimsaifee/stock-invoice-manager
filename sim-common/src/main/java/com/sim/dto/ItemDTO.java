@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class ItemDTO {
 
-	private int id;
+	private Integer id;
 
 	private String name;
 
@@ -28,11 +28,12 @@ public class ItemDTO {
 
 	private StockDTO stock;
 
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
-
-	public void setId(int id) {
+	
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

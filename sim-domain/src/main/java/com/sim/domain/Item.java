@@ -15,12 +15,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "item")
 public class Item {
 
 	// TODO: Add sequence.
+//	  @Id
+//	    @GeneratedValue(generator = "SER_LOC_SEQ", strategy = GenerationType.SEQUENCE)
+//	    @SequenceGenerator(name = "SER_LOC_SEQ", sequenceName = "SERVING_LOCATION_SEQUENCE", allocationSize=3,initialValue=1)
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -39,7 +44,7 @@ public class Item {
 
 	@Column(name = "mrp", nullable = false)
 	private double mrp;
-
+ 
 	@Column(name = "rrp", nullable = false)
 	private double rrp;
 
@@ -49,11 +54,9 @@ public class Item {
 	@Column(name = "updated_ts")
 	private Timestamp updatedTs;
 
-	
 	@Lob
-	private byte [] barcodeImage;
-	
-	
+	private byte[] barcodeImage;
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Category category;
 
@@ -61,11 +64,9 @@ public class Item {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "item")
 	private Stock stock;
 
-	@OneToMany(mappedBy = "item",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ItemInvoice> itemInvoices;
 
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -165,17 +166,16 @@ public class Item {
 	public byte[] getBarcodeImage() {
 		return barcodeImage;
 	}
-	
+
 	public void setBarcodeImage(byte[] barcodeImage) {
 		this.barcodeImage = barcodeImage;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format(
 				"Item [id=%s, name=%s, barcode=%s, description=%s, costPrice=%s, mrp=%s, rrp=%s, createdTs=%s, updatedTs=%s, category=%s, stock=%s]",
-				id, name, barcode, description, costPrice, mrp, rrp, createdTs, updatedTs, category, stock
-				);
+				id, name, barcode, description, costPrice, mrp, rrp, createdTs, updatedTs, category, stock);
 	}
 
 }

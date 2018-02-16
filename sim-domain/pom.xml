@@ -2,9 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.sim</groupId>
 	<artifactId>sim-domain</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${project.version}</version>
 	<packaging>jar</packaging>
 
 	<name>sim-domain</name>
@@ -12,13 +11,14 @@
 	<properties>
 		<!-- Generic properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
-
-		<!-- SPRING & HIBERNATE / JPA -->
-		<spring.version>4.0.0.RELEASE</spring.version>
-		<hibernate.version>4.1.9.Final</hibernate.version>
-
 	</properties>
+
+	<parent>
+		<groupId>org.sim</groupId>
+		<artifactId>sim-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../sim-parent/pom.xml</relativePath>
+	</parent>
 
 
 	<dependencies>
@@ -46,6 +46,12 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>javassist</artifactId>
+					<groupId>javassist</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- derby dependency -->
@@ -71,6 +77,6 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-		
+
 	</dependencies>
 </project>

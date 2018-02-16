@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import com.sim.dto.StockDTO;
 import com.sim.service.ItemService;
 import com.sim.view.dialog.MessageDialog;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -36,6 +33,9 @@ public class AddProductController implements Initializable{
 	
 	@FXML
 	private TextField descriptionField;
+	
+	@FXML
+	private TextField costPriceField;
 	
 	@FXML
 	private TextField mrpField;
@@ -67,9 +67,10 @@ public class AddProductController implements Initializable{
 	@FXML
 	public void saveProduct() {
 		ItemDTO itemDTO = new ItemDTO();
-		itemDTO.setBarcode("");
+		itemDTO.setBarcode(this.barcodeField.getText());
 		itemDTO.setName(this.nameField.getText());
 		itemDTO.setDescription(this.descriptionField.getText());
+		itemDTO.setCostPrice(Double.valueOf(this.costPriceField.getText()));
 		itemDTO.setMrp(Double.valueOf(this.mrpField.getText()));
 		itemDTO.setRrp(Double.valueOf(this.revisedMrpField.getText()));
 		itemDTO.setCreatedTs(new Timestamp(System.currentTimeMillis()));
@@ -123,6 +124,7 @@ public class AddProductController implements Initializable{
 		
 		this.nameField.setText(itemDTO.getName());
 		this.descriptionField.setText(itemDTO.getDescription());
+		this.costPriceField.setText(String.valueOf(itemDTO.getCostPrice()));
 		this.mrpField.setText(String.valueOf(itemDTO.getMrp()));
 		this.revisedMrpField.setText(String.valueOf(itemDTO.getRrp()));
 		this.stockField.setText(itemDTO.getStock() != null ? String.valueOf(itemDTO.getStock().getQuantity()) : "0");

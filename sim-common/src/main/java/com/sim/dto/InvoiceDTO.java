@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InvoiceDTO {
 
-	private long id;
+	private int id;
 
 	private Timestamp createdTs;
 
@@ -21,11 +21,11 @@ public class InvoiceDTO {
 
 	private List<ItemInvoiceDTO> itemInvoices;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

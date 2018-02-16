@@ -49,8 +49,8 @@ public class ItemServiceImpl implements ItemService {
 			
 			return MapperUtil.map(updatedItem, ItemDTO.class);
 		} else {
-			LOGGER.error("Failed to update the barcode.");
-			return null;
+			LOGGER.error("Barcode is provided by user.");
+			return MapperUtil.map(createdItem, ItemDTO.class);
 		}
 	}
 

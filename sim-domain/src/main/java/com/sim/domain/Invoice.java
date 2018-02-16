@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +20,9 @@ import javax.persistence.Table;
 public class Invoice {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ITEM_ID_GENERATOR")
+	@SequenceGenerator(name="ITEM_ID_GENERATOR", sequenceName="ITEM_SQ")
+	private int id;
 
 	@Column(name = "created_ts", nullable = false)
 	private Timestamp createdTs;
@@ -43,11 +45,11 @@ public class Invoice {
 	@OneToMany(/*mappedBy = "invoice", */cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ItemInvoice> itemInvoices;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

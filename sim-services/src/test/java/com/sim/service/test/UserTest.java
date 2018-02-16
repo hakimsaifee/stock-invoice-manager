@@ -19,7 +19,7 @@ public class UserTest {
 	@Test
 	public void createUserTest()
 	{
-		userDetailService.createUserTest();
+//		userDetailService.createUserTest();
 //		UserDetailDTO domainObj = new UserDetailDTO();
 //		domainObj.setUserName("hakim");
 //		domainObj.setPassword("1234");
