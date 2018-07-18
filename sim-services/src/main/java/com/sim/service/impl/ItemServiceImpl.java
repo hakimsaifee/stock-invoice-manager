@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sim.common.util.BarcodeGenerator;
 import com.sim.common.util.MapperUtil;
 import com.sim.dao.ItemDAO;
 import com.sim.domain.Item;
@@ -20,6 +19,8 @@ import com.sim.service.ItemService;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+
+	private static final String DUMMY_BARCODE_IMAGE = "barcodeSample.png";
 
 	@Autowired
 	private ItemDAO itemDAO;
@@ -31,18 +32,8 @@ public class ItemServiceImpl implements ItemService {
 
 		Item item = MapperUtil.map(itemDTO, Item.class);
 		Item createdItem = itemDAO.create(item);
-		if (createdItem != null && (createdItem.getBarcode() == null || createdItem.getBarcode().isEmpty())) {
+		if (createdItem != null && (createdItem.getBarcode() == null || createdItem.getBarcode().trim().isEmpty())) {
 			LOGGER.info("Updating Generated Barcode : {} ", createdItem.getId());
-			String generatedFilPath = BarcodeGenerator.createBarCode128("", String.valueOf(createdItem.getId()));
-			LOGGER.trace("Barcod Generated at : {} ", generatedFilPath);
-			File barcodeFile = new File(generatedFilPath);
-			byte[] barcodeBytes = new byte[(int) barcodeFile.length()];
-			try (FileInputStream fileInputStream = new FileInputStream(barcodeFile)) {
-				fileInputStream.read(barcodeBytes);
-			} catch (Exception e) {
-				LOGGER.trace("Failed to read the barcode : {} ", e);
-			}
-			createdItem.setBarcodeImage(barcodeBytes);
 			createdItem.setBarcode(String.valueOf(createdItem.getId()));
 			Item updatedItem = itemDAO.update(createdItem);
 			LOGGER.info("Barcode Updated Successfully : {} ", createdItem.getId());
@@ -95,4 +86,20 @@ public class ItemServiceImpl implements ItemService {
 		return null;
 	}
 
+	@Override
+	@Transactional
+	public ItemDTO update(ItemDTO itemDTO) {
+		try {
+			Item item = MapperUtil.map(itemDTO, Item.class);
+			Item updatedItem = itemDAO.update(item);
+			if(updatedItem == null) {
+				LOGGER.error("Unalbe to perform update operation : {} ", updatedItem);
+				return null;
+			}
+			return MapperUtil.map(item, ItemDTO.class);
+		}catch(Exception e) {
+			LOGGER.error("Failed to update Item : {}" , itemDTO);
+			return null;
+		}
+	}
 }

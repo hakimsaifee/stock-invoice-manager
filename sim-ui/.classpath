@@ -30,5 +30,6 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/sim-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sim-services"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sim-security"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

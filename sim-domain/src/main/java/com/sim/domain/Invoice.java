@@ -20,8 +20,8 @@ import javax.persistence.Table;
 public class Invoice {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ITEM_ID_GENERATOR")
-	@SequenceGenerator(name="ITEM_ID_GENERATOR", sequenceName="ITEM_SQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_ID_GENERATOR")
+	@SequenceGenerator(name = "ITEM_ID_GENERATOR", sequenceName = "ITEM_SQ")
 	private int id;
 
 	@Column(name = "created_ts", nullable = false)
@@ -30,19 +30,25 @@ public class Invoice {
 	@Column(name = "total_amount", nullable = false)
 	private double totalAmount;
 
+	@Column(name = "round_off", nullable = false)
+	private double roundOff;
+
 	@Column(name = "discount", nullable = false)
 	private double discount;
+
+	@Column(name = "additional_charges", nullable = true)
+	private double additionalCharges;
 
 	@Column(name = "payment_mode", length = 100)
 	private String paymentMode;
 
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Staff staff;
 
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Customer customer;
 
-	@OneToMany(/*mappedBy = "invoice", */cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(/* mappedBy = "invoice", */cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ItemInvoice> itemInvoices;
 
 	public int getId() {
@@ -109,11 +115,27 @@ public class Invoice {
 		this.itemInvoices = itemInvoices;
 	}
 
+	public double getAdditionalCharges() {
+		return additionalCharges;
+	}
+
+	public void setAdditionalCharges(double additionalCharges) {
+		this.additionalCharges = additionalCharges;
+	}
+
+	public double getRoundOff() {
+		return roundOff;
+	}
+	
+	public void setRoundOff(double roundOff) {
+		this.roundOff = roundOff;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format(
-				"Invoice [id=%s, createdTs=%s, totalAmount=%s, discount=%s, paymentMode=%s, staff=%s, customer=%s, itemInvoices=%s]",
-				id, createdTs, totalAmount, discount, paymentMode, staff, customer, itemInvoices);
+				"Invoice [id=%s, createdTs=%s, totalAmount=%s, roundOff=%s, discount=%s, additionalCharges=%s, paymentMode=%s]",
+				id, createdTs, totalAmount, roundOff, discount, additionalCharges, paymentMode);
 	}
 
 }

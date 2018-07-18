@@ -18,21 +18,22 @@ public class ItemDTO {
 
 	private double rrp;
 
+	private double offerQuantity;
+
+	private double offerPrice;
+
 	private Timestamp createdTs;
 
 	private Timestamp updatedTs;
 
-	private byte [] barcodeImage;
-	
 	private CategoryDTO category;
 
 	private StockDTO stock;
 
-
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -117,11 +118,20 @@ public class ItemDTO {
 		this.stock = stock;
 	}
 
-	public byte[] getBarcodeImage() {
-		return barcodeImage;
+	public double getOfferPrice() {
+		return offerPrice;
 	}
-	
-	public void setBarcodeImage(byte[] barcodeImage) {
-		this.barcodeImage = barcodeImage;
+
+	public double getOfferQuantity() {
+		return offerQuantity;
 	}
+
+	public void setOfferPrice(double offerPrice) {
+		this.offerPrice = offerPrice;
+	}
+
+	public void setOfferQuantity(double offerQuantity) {
+		this.offerQuantity = offerQuantity;
+	}
+
 }

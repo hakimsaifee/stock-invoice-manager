@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sim.ui.controller.SelectOfferProductPopupController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="64.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="CENTER" text="Product Offer Selection">
+                     <font>
+                        <Font name="Arial Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator prefHeight="15.0" prefWidth="600.0">
+               <VBox.margin>
+                  <Insets bottom="23.0" />
+               </VBox.margin>
+            </Separator>
+            <HBox alignment="CENTER">
+               <children>
+                  <TableView fx:id="selectOfferProductTable" prefHeight="158.0" prefWidth="568.0">
+                    <columns>
+                      <TableColumn fx:id="offerTypeColumn" text="Offer Type" />
+                      <TableColumn fx:id="productNameColumn" minWidth="0.0" prefWidth="0.0" text="Product Name" />
+                        <TableColumn fx:id="mrpColumn" editable="false" prefWidth="236.0" sortable="false" text="MRP" />
+                        <TableColumn fx:id="offerPriceColumn" maxWidth="3982.0" minWidth="8.0" prefWidth="160.0" text="Offer Price" />
+                        <TableColumn fx:id="offerQuantityColumn" prefWidth="213.0" text="Minimun Qty." />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

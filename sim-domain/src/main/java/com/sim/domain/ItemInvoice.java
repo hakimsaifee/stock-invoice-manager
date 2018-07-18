@@ -23,6 +23,9 @@ public class ItemInvoice {
 	@Column(name = "purchased_quantity", nullable = false)
 	private double purchasedQuantity;
 
+	@Column(name = "selling_price", nullable = false)
+	private double productSellingPrice;
+
 	@Column(name = "created_ts", nullable = false)
 	private Timestamp createdTs;
 
@@ -71,11 +74,19 @@ public class ItemInvoice {
 //	public void setInvoice(Invoice invoice) {
 //		this.invoice = invoice;
 //	}
+	
+	public double getProductSellingPrice() {
+		return productSellingPrice;
+	}
+	
+	public void setProductSellingPrice(double productSellingPrice) {
+		this.productSellingPrice = productSellingPrice;
+	}
 
 	@Override
 	public String toString() {
-		return String.format("ItemInvoice [id=%s, purchangedQuantity=%s, createdTs=%s]", id, purchasedQuantity,
-				createdTs);
+		return String.format("ItemInvoice [id=%s, purchasedQuantity=%s, productSellingPrice=%s, createdTs=%s, item=%s]",
+				id, purchasedQuantity, productSellingPrice, createdTs, item);
 	}
 
 }

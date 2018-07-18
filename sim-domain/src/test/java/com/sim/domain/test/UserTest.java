@@ -21,7 +21,7 @@ public class UserTest {
 	public void createUserTest()
 	{
 		UserDetail domainObj = new UserDetail();
-		domainObj.setUserName("hakim");
+		domainObj.setUsername("hakim");
 		domainObj.setPassword("1234");
 		userDetailDAO.create(domainObj );
 		System.out.println("user detail created.");

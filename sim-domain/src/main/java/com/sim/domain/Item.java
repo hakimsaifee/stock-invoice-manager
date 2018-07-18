@@ -1,6 +1,7 @@
 package com.sim.domain;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "item")
@@ -47,6 +47,12 @@ public class Item {
  
 	@Column(name = "rrp", nullable = false)
 	private double rrp;
+	
+	@Column(name = "offer_quantity", nullable = false)
+	private double offerQuantity;
+	
+	@Column(name = "offer_price", nullable = false)
+	private double offerPrice;
 
 	@Column(name = "created_ts", nullable = false)
 	private Timestamp createdTs;
@@ -57,7 +63,7 @@ public class Item {
 	@Lob
 	private byte[] barcodeImage;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 
 	// TODO: Check for correct cascade type.
@@ -170,12 +176,29 @@ public class Item {
 	public void setBarcodeImage(byte[] barcodeImage) {
 		this.barcodeImage = barcodeImage;
 	}
+	
+	public double getOfferPrice() {
+		return offerPrice;
+	}
+	
+	public double getOfferQuantity() {
+		return offerQuantity;
+	}
+	
+	public void setOfferPrice(double offerPrice) {
+		this.offerPrice = offerPrice;
+	}
+	
+	public void setOfferQuantity(double offerQuantity) {
+		this.offerQuantity = offerQuantity;
+	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"Item [id=%s, name=%s, barcode=%s, description=%s, costPrice=%s, mrp=%s, rrp=%s, createdTs=%s, updatedTs=%s, category=%s, stock=%s]",
-				id, name, barcode, description, costPrice, mrp, rrp, createdTs, updatedTs, category, stock);
+				"Item [id=%s, name=%s, barcode=%s, description=%s, costPrice=%s, mrp=%s, rrp=%s, offerQuantity=%s, offerPrice=%s, createdTs=%s, updatedTs=%s, barcodeImage=%s, category=%s, stock=%s, itemInvoices=%s]",
+				id, name, barcode, description, costPrice, mrp, rrp, offerQuantity, offerPrice, createdTs, updatedTs,
+				Arrays.toString(barcodeImage), category, stock, itemInvoices);
 	}
 
 }

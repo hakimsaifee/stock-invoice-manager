@@ -13,11 +13,15 @@ public class InvoiceDTO {
 
 	private double discount;
 
+	private double additionalCharges;
+
 	private String paymentMode;
 
 	private StaffDTO staff;
 
 	private CustomerDTO customer;
+	
+	private double roundOff;
 
 	private List<ItemInvoiceDTO> itemInvoices;
 
@@ -84,6 +88,20 @@ public class InvoiceDTO {
 	public void setItemInvoices(List<ItemInvoiceDTO> itemInvoices) {
 		this.itemInvoices = itemInvoices;
 	}
+
+	public double getAdditionalCharges() {
+		return additionalCharges;
+	}
+
+	public void setAdditionalCharges(double additionalCharges) {
+		this.additionalCharges = additionalCharges;
+	}
+
+	public double getRoundOff() {
+		return roundOff;
+	}
 	
-	
+	public void setRoundOff(double roundOff) {
+		this.roundOff = roundOff;
+	}
 }

@@ -21,6 +21,7 @@
 		<module>../sim-common</module>
 		<module>../sim-domain</module>
 		<module>../sim-services</module>
+		<module>../sim-security</module>
 		<module>../sim-ui</module>
 	</modules>
 	

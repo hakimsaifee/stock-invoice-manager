@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>sim-ui</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sim-ui</name>
@@ -45,11 +44,11 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-tx</artifactId>
-    <version>${spring.version}</version>
-</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -64,17 +63,24 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.sim</groupId>
 			<artifactId>sim-domain</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.sim</groupId>
 			<artifactId>sim-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.sim</groupId>
+			<artifactId>sim-security</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 
 
 
@@ -83,36 +89,43 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.zenjava</groupId>
-				<artifactId>javafx-maven-plugin</artifactId>
-				<version>8.8.3</version>
-				<configuration>
-					<mainClass>com.sim.TestMain</mainClass>
-				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<outputAbsoluteArtifactFilename>${project.build.directory}/sim</outputAbsoluteArtifactFilename>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
-
-
-			<plugin><!--groupId>org.dstovall</groupId-->
-            <groupId>com.jolira</groupId>
-            <artifactId>onejar-maven-plugin</artifactId>
-            <version>1.4.4</version>
-            <executions>
-              <execution>
-                <phase>package</phase>
-                <configuration>
-                  <mainClass>com.sim.InvoiceStartup</mainClass>
-                  <attachToBuild>true</attachToBuild>
-                  <!-- https://code.google.com/p/onejar-maven-plugin/issues/detail?id=8 -->
-                  <!--classifier>onejar</classifier-->
-                  <filename>abc-onejar.jar</filename>
-                </configuration>
-                <goals>
-                  <goal>one-jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib</classpathPrefix>
+							<mainClass>com.sim.InvoiceStartup</mainClass>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>lib/</Class-Path>
+							
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 
 		</plugins>
 

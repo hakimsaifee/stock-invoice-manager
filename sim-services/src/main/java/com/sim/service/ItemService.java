@@ -7,6 +7,8 @@ import com.sim.dto.ItemDTO;
 public interface ItemService {
 
 	ItemDTO create(ItemDTO itemDTO);
+	
+	ItemDTO update(ItemDTO itemDTO);
 
 	void removeItem(Integer number);
 	

@@ -2,11 +2,16 @@ package com.sim.dto;
 
 import java.sql.Timestamp;
 
+import com.sim.common.constant.OfferTypeEnum;
+
 public class ItemInvoiceDTO {
 
 	private long id;
 
+	//Sold quantity.
 	private double purchasedQuantity;
+	
+	private double productSellingPrice;
 
 	private Timestamp createdTs;
 
@@ -14,6 +19,7 @@ public class ItemInvoiceDTO {
 
 	private double amount;
 	
+	private OfferTypeEnum offerType;
 	
 	public double getAmount() {
 		return amount;
@@ -55,6 +61,21 @@ public class ItemInvoiceDTO {
 		this.item = item;
 	}
 
+	 public double getProductSellingPrice() {
+		return productSellingPrice;
+	}
+	 
+	 public void setProductSellingPrice(double productSellingPrice) {
+		this.productSellingPrice = productSellingPrice;
+	}
+	 
+	 public OfferTypeEnum getOfferType() {
+		return offerType;
+	}
+	 
+	 public void setOfferType(OfferTypeEnum offerType) {
+		this.offerType = offerType;
+	}
 	// private InvoiceDTO invoice;
 
 }

@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Feb 18 14:24:48 IST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0161-a81f-6e4c-00000b61dd70 
+on database directory D:\databases\simdb with class loader sun.misc.Launcher$AppClassLoader@3b9a45b3 
+Loaded from file:/C:/Users/hakim.s/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=D:\Workspace\stock-invoice-manager\sim-services
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

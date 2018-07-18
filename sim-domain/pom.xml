@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>sim-domain</artifactId>
-	<version>${project.version}</version>
 	<packaging>jar</packaging>
 
 	<name>sim-domain</name>
@@ -76,6 +75,12 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.sim</groupId>
+			<artifactId>sim-common</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 	</dependencies>

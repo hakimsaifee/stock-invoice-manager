@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="barcodeTemplate" pageWidth="133" pageHeight="90" columnWidth="133" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="098f55e5-b46b-4f08-88df-38525561626e">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="item" class="com.sim.dto.ItemDTO"/>
+	<parameter name="barcode" class="java.lang.String"/>
+	<parameter name="mrp" class="java.lang.Double"/>
+	<parameter name="rrp" class="java.lang.Double"/>
+	<parameter name="name" class="java.lang.String"/>
+	<field name="item" class="com.sim.dto.ItemDTO"/>
+	<background>
+		<band splitType="Prevent"/>
+	</background>
+	<title>
+		<band height="90">
+			<rectangle>
+				<reportElement x="1" y="0" width="131" height="88" uuid="48b92bc6-39fc-4815-ba5c-5bff5f406e63"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="1" y="46" width="130" height="1" uuid="b154045c-b37e-4d8c-a204-bd51897d7513"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<componentElement>
+				<reportElement x="7" y="2" width="121" height="31" isPrintInFirstWholeBand="true" uuid="974122f4-969a-4882-9592-a37255ca7922"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+					<jr:codeExpression><![CDATA[$P{barcode}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="33" width="131" height="13" uuid="88545572-c47f-40a7-b6f6-a63880a5084f"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{barcode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="65" width="53" height="10" uuid="ef8e64df-2d0b-452f-bde3-07e71748b7f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MRP :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="74" width="53" height="15" uuid="f63be886-b655-4bf2-8342-b2ac21878455"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Our Price :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="65" width="77" height="10" uuid="b6747493-2fe3-4d91-a4bd-52b92a546dd7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mrp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="74" width="77" height="15" uuid="3e1b2ab9-0e83-4d2c-b8db-e4cdf7ae0977"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{rrp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="51" width="53" height="12" uuid="40a047ab-d102-4d7b-9041-38065c8bd01c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="54" y="51" width="77" height="12" uuid="a4b1ff47-533a-4919-bcb8-96c2eaa85bcd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

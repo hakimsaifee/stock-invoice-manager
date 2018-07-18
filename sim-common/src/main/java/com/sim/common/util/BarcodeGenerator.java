@@ -84,5 +84,9 @@ public class BarcodeGenerator {
             ex.printStackTrace();
         }
       }
+  
+  public static void main(String[] args) {
+	 String generatedFilPath = BarcodeGenerator.createBarCode128("", String.valueOf("123456789"));
+}
 
 }

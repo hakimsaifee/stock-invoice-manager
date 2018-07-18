@@ -2,7 +2,7 @@ package com.sim.dto;
 
 import java.util.List;
 
-public class CategoryDTO {
+public class CategoryDTO  implements Comparable<CategoryDTO>{
 
 	private long id;
 
@@ -32,6 +32,11 @@ public class CategoryDTO {
 
 	public void setItems(List<ItemDTO> items) {
 		this.items = items;
+	}
+
+	@Override
+	public int compareTo(CategoryDTO category) {
+		return this.categoryName.compareToIgnoreCase(category.categoryName);
 	}
 	
 	
