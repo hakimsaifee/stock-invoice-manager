@@ -41,6 +41,9 @@ public class Invoice {
 
 	@Column(name = "payment_mode", length = 100)
 	private String paymentMode;
+	
+	@Column(name = "bill_name", length = 250)
+	private String billName;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Staff staff;
@@ -131,11 +134,20 @@ public class Invoice {
 		this.roundOff = roundOff;
 	}
 	
+	public String getBillName() {
+		return billName;
+	}
+	
+	public void setBillName(String billName) {
+		this.billName = billName;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format(
-				"Invoice [id=%s, createdTs=%s, totalAmount=%s, roundOff=%s, discount=%s, additionalCharges=%s, paymentMode=%s]",
-				id, createdTs, totalAmount, roundOff, discount, additionalCharges, paymentMode);
+				"Invoice [id=%s, createdTs=%s, totalAmount=%s, roundOff=%s, discount=%s, additionalCharges=%s, paymentMode=%s, billName=%s, staff=%s, customer=%s, itemInvoices=%s]",
+				id, createdTs, totalAmount, roundOff, discount, additionalCharges, paymentMode, billName, staff,
+				customer, itemInvoices);
 	}
 
 }

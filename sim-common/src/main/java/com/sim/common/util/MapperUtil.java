@@ -27,6 +27,7 @@ public class MapperUtil {
 		BillModel billModel = new BillModel();
 		billModel.setId(invoiceDTO.getId());
 		billModel.setCreatedTs(invoiceDTO.getCreatedTs());
+		billModel.setBillName(invoiceDTO.getBillName());
 		billModel.setCustomer(invoiceDTO.getCustomer());
 		billModel.setDiscount(invoiceDTO.getDiscount());
 		billModel.setAdditionalCharges(invoiceDTO.getAdditionalCharges());

@@ -17,10 +17,12 @@ public class InvoiceDTO {
 
 	private String paymentMode;
 
+	private String billName;
+
 	private StaffDTO staff;
 
 	private CustomerDTO customer;
-	
+
 	private double roundOff;
 
 	private List<ItemInvoiceDTO> itemInvoices;
@@ -100,8 +102,16 @@ public class InvoiceDTO {
 	public double getRoundOff() {
 		return roundOff;
 	}
-	
+
 	public void setRoundOff(double roundOff) {
 		this.roundOff = roundOff;
+	}
+
+	public String getBillName() {
+		return billName;
+	}
+
+	public void setBillName(String billName) {
+		this.billName = billName;
 	}
 }

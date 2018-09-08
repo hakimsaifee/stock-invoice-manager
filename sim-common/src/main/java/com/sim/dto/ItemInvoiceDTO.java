@@ -19,6 +19,8 @@ public class ItemInvoiceDTO {
 
 	private double amount;
 	
+	private long serialNumber;
+	
 	private OfferTypeEnum offerType;
 	
 	public double getAmount() {
@@ -75,6 +77,14 @@ public class ItemInvoiceDTO {
 	 
 	 public void setOfferType(OfferTypeEnum offerType) {
 		this.offerType = offerType;
+	}
+	 
+	 public long getSerialNumber() {
+		return serialNumber;
+	}
+	 
+	 public void setSerialNumber(long serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 	// private InvoiceDTO invoice;
 

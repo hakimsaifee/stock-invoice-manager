@@ -29,7 +29,7 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 
-public class JasperInvoiceBuilder implements InvoiceBuilder{
+public class JasperInvoiceBuilder implements InvoiceBuilder {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JasperInvoiceBuilder.class);
 	private static final Path PDF_INVOICE_PATH = Paths.get(System.getProperty("PDF_INVOICE_PATH", "invoices"));
@@ -51,6 +51,8 @@ public class JasperInvoiceBuilder implements InvoiceBuilder{
 			parameters.put("storeAddressField", billModel.getShopAddress());
 			parameters.put("contactNumber", billModel.getContactNumber());
 			parameters.put("invoiceIdField", billModel.getId());
+			parameters.put("customerNameField", (billModel.getBillName() == null || billModel.getBillName().isEmpty())
+					? "N/A" : billModel.getBillName());
 			parameters.put("invoiceDateField", billModel.getCreatedTs());
 			parameters.put("payableAmount", billModel.getTotalAmount());
 			parameters.put("roundOff", billModel.getRoundOff());

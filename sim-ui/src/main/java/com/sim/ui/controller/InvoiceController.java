@@ -1,7 +1,5 @@
 package com.sim.ui.controller;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -108,10 +106,13 @@ public class InvoiceController implements Initializable {
 	private TableColumn<?, ?> amountColumn;
 
 	@FXML
+	private TableColumn<?, ?> serialNumberColumn;
+
+	@FXML
 	private DatePicker invoiceDate;
 
 	@FXML
-	private TextField subTotalField;
+	private Label subTotalField;
 	@FXML
 	private TextField discountField;
 	@FXML
@@ -123,6 +124,12 @@ public class InvoiceController implements Initializable {
 
 	@FXML
 	private TextField cashTakenField;
+
+	@FXML
+	private TextField billNameField;
+
+	@FXML
+	private TextField paymentModeField;
 
 	@FXML
 	private Label changeGivenField;
@@ -144,6 +151,9 @@ public class InvoiceController implements Initializable {
 
 	@FXML
 	private ComboBox<StaffDTO> staffCombo;
+	
+	@FXML
+	private Label totalQuantityLabel;
 
 	private ObservableList<ItemInvoiceDTO> invoiceItems = FXCollections.observableArrayList();
 
@@ -165,6 +175,8 @@ public class InvoiceController implements Initializable {
 
 	private SelectOfferProductPopupController selectOfferPopup;
 
+	boolean editMode;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -228,6 +240,8 @@ public class InvoiceController implements Initializable {
 
 		amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
+		serialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
+
 		productNameColumn
 				.setCellValueFactory(new Callback<CellDataFeatures<ItemInvoiceDTO, String>, ObservableValue<String>>() {
 					public ObservableValue<String> call(CellDataFeatures<ItemInvoiceDTO, String> itemInvoiceDTO) {
@@ -258,15 +272,15 @@ public class InvoiceController implements Initializable {
 			recalcuateCart();
 		});
 
-		initializeStaffComboBox();
+		//initializeStaffComboBox();
 
-		loadPaymentModes();
+//		loadPaymentModes();
 
 		loadSaffDetails();
 
-		if (staffCombo.getSelectionModel() != null) {
+		/*if (staffCombo.getSelectionModel() != null) {
 			staffCombo.getSelectionModel().selectFirst();
-		}
+		}*/
 
 		printButton.setDisable(true);
 
@@ -407,9 +421,11 @@ public class InvoiceController implements Initializable {
 
 	private void recalcuateCart() {
 		double totalAmount = 0.00;
+		double totalQuantity = 0.0;
 		for (ItemInvoiceDTO itemInvoiceDTO : invoiceItems) {
 			itemInvoiceDTO.setAmount(itemInvoiceDTO.getProductSellingPrice() * itemInvoiceDTO.getPurchasedQuantity());
 			totalAmount = totalAmount + itemInvoiceDTO.getAmount();
+			totalQuantity = totalQuantity + itemInvoiceDTO.getPurchasedQuantity();
 		}
 		subTotalField.setText(String.valueOf(totalAmount));
 		// calculate discount
@@ -425,7 +441,8 @@ public class InvoiceController implements Initializable {
 		roundOff = MathUtil.preciseDouble(roundOff, 2); 
 		roundOffLabel.setText(String.valueOf(roundOff));
 		totalAmountField.setText(String.valueOf(grandTotal));
-		
+		LOGGER.info("Total Quantity Purchased : {}", totalQuantity);
+		this.totalQuantityLabel.setText(String.valueOf(totalQuantity));
 		refreshTable();
 	}
 
@@ -460,16 +477,17 @@ public class InvoiceController implements Initializable {
 
 			InvoiceDTO invoiceDTO = new InvoiceDTO();
 			invoiceDTO.setCreatedTs(new Timestamp(System.currentTimeMillis()));
+			invoiceDTO.setBillName(billNameField != null ? billNameField.getText() : null);
+			invoiceDTO.setPaymentMode(paymentModeField != null ? paymentModeField.getText() : null);
 			invoiceDTO.setTotalAmount(Double.valueOf(totalAmountField.getText()));
 			invoiceDTO.setDiscount(Double.valueOf(discountField.getText().isEmpty() ? "0.0" : discountField.getText()));
 			invoiceDTO.setAdditionalCharges(Double
 					.valueOf(additionalChargesField.getText().isEmpty() ? "0.0" : additionalChargesField.getText()));
 			invoiceDTO.setRoundOff(Double.valueOf(roundOffLabel.getText()));
-			invoiceDTO.setPaymentMode(paymentModeCombo.getSelectionModel().getSelectedItem());
-			LOGGER.trace("Selected Payment Mode : {} ", paymentModeCombo.getSelectionModel().getSelectedItem());
+//			invoiceDTO.setPaymentMode(paymentModeCombo.getSelectionModel().getSelectedItem());
 			// TODO:Add Staff details...
-			StaffDTO selectedStaff = staffCombo.getSelectionModel().getSelectedItem();
-			invoiceDTO.setStaff(selectedStaff);
+/*			StaffDTO selectedStaff = staffCombo.getSelectionModel().getSelectedItem();
+			invoiceDTO.setStaff(selectedStaff);*/
 
 			invoiceDTO.setItemInvoices(invoiceItems);
 
@@ -497,7 +515,9 @@ public class InvoiceController implements Initializable {
 	}
 
 	private void disableComponents(boolean isDisable) {
-		itemInvoiceTable.setDisable(isDisable);
+//		itemInvoiceTable.setDisable(isDisable);
+		this.editMode = isDisable;
+		quantityColumn.setEditable(isDisable);
 		barcode.setDisable(isDisable);
 		discountField.setDisable(isDisable);
 		additionalChargesField.setDisable(isDisable);
@@ -505,8 +525,12 @@ public class InvoiceController implements Initializable {
 		changeGivenField.setDisable(isDisable);
 		saveButton.setDisable(isDisable);
 		cancelButton.setDisable(isDisable);
-		paymentModeCombo.setDisable(isDisable);
-		staffCombo.setDisable(isDisable);
+		removeButton.setDisable(isDisable);
+		billNameField.setDisable(isDisable);
+		paymentModeField.setDisable(isDisable);
+		invoiceDate.setDisable(isDisable);
+//		paymentModeCombo.setDisable(isDisable);
+//		staffCombo.setDisable(isDisable);
 		roundOffLabel.setDisable(isDisable);
 		printButton.setDisable(false);
 	}
@@ -536,7 +560,9 @@ public class InvoiceController implements Initializable {
 		if (itemInvoiceTable.getSelectionModel().getSelectedItem() != null) {
 			ItemInvoiceDTO itemInvoiceDTO = itemInvoiceTable.getSelectionModel().getSelectedItem();
 			selectedInvoiceRow = itemInvoiceDTO;
-			removeButton.setDisable(false);
+			if(!this.editMode) {
+				removeButton.setDisable(false);
+			}
 		}
 	}
 
