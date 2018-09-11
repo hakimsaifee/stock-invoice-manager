@@ -1,8 +1,8 @@
-# stock-invoice-manager
+Spring Boot and JavaFX
 
-Developed using Spring Boot + Spring Data + JavaFX + maven.
+Developed using Spring Boot,JavaFX.
 
-SIM(Stock and Invoice Manager) is an software developed for Inventory Management and Invoce Generation.
+SIM(Stock and Invoice Manager) is an developed for Inventory Management and Invoce Generation.
 
 Features :
 - Barcode Scanning ablility.
